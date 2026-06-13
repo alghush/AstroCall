@@ -1,0 +1,386 @@
+/* ----- ROOT — Design Tokens ----- */
+:root {
+    /* Brand */
+    --color-primary:       #ff6b00;
+    --color-primary-hover: #e75f00;
+    --color-primary-light: #fff4ed;
+
+    /* Backgrounds */
+    --bg-body:    #fafafa;
+    --bg-card:    #ffffff;
+    --bg-section: #f5f5f5;
+
+    /* Text */
+    --text-main:       #1a1a1a;
+    --text-muted:      #666666;
+    --text-on-primary: #ffffff;
+
+    /* Borders & Shadows */
+    --border-color: #00000014;
+    --shadow-card:  0 5px 20px #00000014;
+    --shadow-btn:   0 3px 10px #00000026;
+
+    /* Radius */
+    --radius-sm:   8px;
+    --radius-md:   16px;
+    --radius-lg:   20px;
+    --radius-full: 50%;
+
+    /* Transitions */
+    --transition: 0.3s ease;
+
+    /* Typography */
+    --font-main: 'Segoe UI', sans-serif;
+}
+
+/* ----- DARK MODE ----- */
+[data-theme="dark"] {
+    --color-primary-light: #2a1500;
+
+    --bg-body:    #0f0f0f;
+    --bg-card:    #1a1a1a;
+    --bg-section: #141414;
+
+    --text-main:  #f0f0f0;
+    --text-muted: #999999;
+
+    --border-color: #ffffff14;
+    --shadow-card:  0 5px 20px #00000066;
+    --shadow-btn:   0 3px 10px #00000080;
+}
+
+[data-theme="dark"] .navbar-toggler-icon {
+    filter: invert(1);
+}
+
+/* ----- BASE ----- */
+body {
+    font-family: var(--font-main);
+    background:  var(--bg-body);
+    color:       var(--text-main);
+    transition:  background var(--transition), color var(--transition);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color:      var(--text-main);
+    transition: color var(--transition);
+}
+
+p {
+    color:      var(--text-muted);
+    transition: color var(--transition);
+}
+
+/* ---- PARTICLES / STARS ---- */
+#stars {
+    position: fixed;
+    top:      0;
+    left:     0;
+    width:    100%;
+    height:   100%;
+    z-index:  0;
+    pointer-events: none;
+}
+
+body > *:not(#stars) {
+    position: relative;
+    z-index:  1;
+}
+
+/* ----- BUTTONS ----- */
+.btn-orange {
+    background: var(--color-primary);
+    color:      var(--text-on-primary);
+    border:     none;
+    transition: var(--transition);
+    padding-bottom: 4px ;
+}
+
+.btn-orange:hover {
+    background: var(--color-primary-hover);
+    color:      var(--text-on-primary);
+    transform:  translateY(-2px);
+}
+
+.btn-outline-orange {
+    border:     1px solid var(--color-primary);
+    color:      var(--color-primary);
+    transition: var(--transition);
+}
+
+.btn-outline-orange:hover {
+    background: var(--color-primary);
+    color:      var(--text-on-primary);
+}
+
+/* ----- TYPOGRAPHY HELPERS ----- */
+.text-orange       { color: var(--color-primary); }
+.text-muted-custom { color: var(--text-muted); }
+
+/* -----  NAVBAR ----- */
+.site-header {
+    background: var(--bg-card);
+    transition: background var(--transition);
+}
+
+.site-header .nav-link {
+    color:         var(--text-main);
+    font-weight:   500;
+    border-radius: var(--radius-sm);
+    transition:    color var(--transition), background var(--transition);
+    position:      relative;
+}
+
+.site-header .nav-link::after {
+    content:       '';
+    position:      absolute;
+    bottom:        0;
+    left:          12px;
+    right:         12px;
+    height:        2px;
+    background:    var(--color-primary);
+    transform:     scaleX(0);
+    transition:    transform var(--transition);
+    border-radius: 2px;
+}
+
+.site-header .nav-link:hover,
+.site-header .nav-link.active {
+    color: var(--color-primary);
+}
+
+.site-header .nav-link:hover::after,
+.site-header .nav-link.active::after {
+    transform: scaleX(1);
+}
+
+/* ----- MOBILE ICONS ----- */
+.nav-icon-btn {
+    color:         var(--text-main);
+    font-size:     1.3rem;
+    padding:       4px 8px;
+    border-radius: var(--radius-sm);
+    transition:    var(--transition);
+    line-height:   1;
+}
+
+.nav-icon-btn:hover {
+    color:      var(--color-primary);
+    background: var(--color-primary-light);
+}
+
+/* ----- MOBILE MENU DESPLEGADO ----- */
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background:    var(--bg-card);
+        border-radius: var(--radius-md);
+        padding:       1rem;
+        margin-top:    8px;
+        box-shadow:    var(--shadow-card);
+    }
+
+    .site-header .nav-link::after { display: none; }
+}
+
+
+
+/* ----- THEME TOGGLE ----- */
+.theme-toggle {
+    background:      var(--bg-card);
+    border:          1px solid var(--border-color);
+    color:           var(--text-main);
+    width:           36px;
+    height:          36px;
+    border-radius:   var(--radius-full);
+    display:         flex;
+    align-items:     center;
+    justify-content: center;
+    cursor:          pointer;
+    transition:      var(--transition);
+    font-size:       1rem;
+    padding:         0;
+}
+
+.theme-toggle:hover {
+    background:   var(--color-primary);
+    border-color: var(--color-primary);
+    color:        var(--text-on-primary);
+}
+
+/* ----- CARDS ----- */
+.card {
+    background:    var(--bg-card);
+    border:        1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow:    var(--shadow-card);
+    transition:    background var(--transition), box-shadow var(--transition);
+}
+
+.astrologer-card:hover {
+    transform:  translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+/*----- FORM INPUTS ----- */
+.form-control {
+    background:   var(--bg-body);
+    color:        var(--text-main);
+    border-color: var(--border-color);
+    transition:   var(--transition);
+}
+
+.form-control::placeholder {
+    color: var(--text-muted);
+}
+
+.form-control:focus {
+    background:   var(--bg-body);
+    color:        var(--text-main);
+    border-color: var(--color-primary);
+    box-shadow:   0 0 0 3px rgba(255, 107, 0, 0.15);
+}
+
+/*----- HERO ----- */
+.hero {
+    background: var(--color-primary-light);
+    padding:    80px 0;
+    position:   relative;
+    overflow:   hidden;
+    transition: background var(--transition);
+}
+
+.hero h1 {
+    font-size:   55px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.hero h1 span { color: var(--color-primary); }
+
+.hero-buttons {
+    display:    flex;
+    gap:        15px;
+    margin-top: 25px;
+    flex-wrap:  wrap;
+}
+
+/* ----- SLIDER ----- */
+.slide {
+    display:  none;
+    opacity:  0;
+}
+
+.active-slide {
+    display:   block;
+    animation: slideIn 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+
+@keyframes slideIn {
+    from {
+        opacity:   0;
+        transform: translateX(40px);
+    }
+    to {
+        opacity:   1;
+        transform: translateX(0);
+    }
+}
+
+@media (min-width: 992px) {
+    .slider {
+        min-height: 390px;
+    }
+
+    .hero img {
+        max-height: 380px;
+        object-fit: contain;
+        border-radius: 20px;
+    }
+}
+
+.slider-btn {
+    position:      absolute;
+    top:           50%;
+    transform:     translateY(-50%);
+    background:    var(--bg-card);
+    color:         var(--text-main);
+    border:        none;
+    width:         50px;
+    height:        50px;
+    border-radius: var(--radius-full);
+    box-shadow:    var(--shadow-btn);
+    transition:    var(--transition);
+    cursor:        pointer;
+}
+
+.slider-btn:hover {
+    background: var(--color-primary);
+    color:      var(--text-on-primary);
+}
+
+.prev { left:  20px; }
+.next { right: 20px; }
+
+/* ----- SECTIONS ----- */
+.bg-section {
+    background: var(--bg-section);
+    transition: background var(--transition);
+}
+
+/* ----- FOOTER ----- */
+.site-footer {
+    background: var(--bg-card);
+    transition: background var(--transition);
+}
+
+/* ----- RESPONSIVE ----- */
+@media (max-width: 1000px) {
+    .hero         { text-align: center; }
+    .hero h1      { font-size: 36px; }
+    .hero-buttons { 
+        justify-content: center;
+    }
+    .hero img     { 
+        margin-top:    30px;
+        border-radius: 20px;
+    }
+    
+}
+
+
+
+
+/* ---- SCROLL ANIMATIONS ---- */
+.reveal {
+    opacity:    0;
+    transform:  translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+    opacity:   1;
+    transform: translateY(0);
+}
+
+.reveal-left {
+    opacity:   0;
+    transform: translateX(-30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal-left.visible {
+    opacity:   1;
+    transform: translateX(0);
+}
+
+.reveal-right {
+    opacity:   0;
+    transform: translateX(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal-right.visible {
+    opacity:   1;
+    transform: translateX(0);
+}
