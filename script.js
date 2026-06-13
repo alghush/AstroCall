@@ -1,5 +1,5 @@
 /*---- DARK MODE TOGGLE ----*/
-const themeToggle = document.querySelector('.theme-toggle');
+const themeToggles = document.querySelectorAll('.theme-toggle');
 const html = document.documentElement;
 
 const savedTheme = localStorage.getItem('theme') || 'light';
@@ -7,23 +7,23 @@ html.setAttribute('data-theme', savedTheme);
 updateIcon(savedTheme);
 loadStars(savedTheme);
 
-themeToggle.addEventListener('click', () => {
-    const current = html.getAttribute('data-theme');
-    const next = current === 'dark' ? 'light' : 'dark';
-    html.setAttribute('data-theme', next);
-    localStorage.setItem('theme', next);
-    updateIcon(next);
-    loadStars(next);
-}
-
-);
-
-
+themeToggles.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const current = html.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        html.setAttribute('data-theme', next);
+        localStorage.setItem('theme', next);
+        updateIcon(next);
+        loadStars(next);
+    });
+});
 
 function updateIcon(theme) {
-    themeToggle.innerHTML = theme === 'dark'
-        ? '<i class="bi bi-sun"></i>'
-        : '<i class="bi bi-moon"></i>';
+    themeToggles.forEach(btn => {
+        btn.innerHTML = theme === 'dark'
+            ? '<i class="bi bi-sun"></i>'
+            : '<i class="bi bi-moon"></i>';
+    });
 }
 
 /* ---- STARS BACKGROUND ---- */
@@ -42,7 +42,6 @@ function loadStars(theme) {
                 value: { min: 0.5, max: theme === 'dark' ? 0.8 : 0.6 },
                 animation: { enable: true, speed: 0.5, sync: false }
             },
-
             size: {
                 value: { min: 1, max: theme === 'dark' ? 2.5 : 3.5 },
                 animation: { enable: true, speed: 0.5, sync: false }
